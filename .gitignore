@@ -13,3 +13,5 @@ media/
 *.pyc
 *.txt
 !requirements.txt
+dev/
+.idea/
