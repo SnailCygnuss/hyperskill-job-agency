@@ -1,0 +1,10 @@
+{% extends "hyperjob/main.html" %}
+{% block title %} {{ block.super }} Log in {% endblock %}
+{% block heading %} Log in to your account {% endblock %}
+{% block content %}
+    <form method="post" action="login">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

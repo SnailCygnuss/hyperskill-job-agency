@@ -1,0 +1,13 @@
+{% extends "hyperjob/main.html" %}
+{% block title %} {{ block.super }} Create Vacancy {% endblock %}
+{% block heading %} List of Resumes {% endblock %}
+{% block content %}
+    <div>
+        <form action="/vacancy/new" method="post">
+            {% csrf_token %}
+            <label for="vacancy_desc">Enter description of Vacancy</label>
+            <textarea name="description" id="vacancy_desc" row="50" cols="50" maxlength="1024"></textarea>
+            <button type="submit">Add vacancy</button>
+        </form>
+    </div>
+{% endblock %}

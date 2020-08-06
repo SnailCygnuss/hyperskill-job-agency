@@ -1,0 +1,10 @@
+{% extends "hyperjob/main.html" %}
+{% block title %} {{ block.super }} Resumes {% endblock %}
+{% block heading %} List of Resumes {% endblock %}
+{% block content %}
+    {% for res in resumes %}
+    <div>
+        {{ res.author }}: {{ res.description }}
+    </div>
+    {% endfor %}
+{% endblock %}

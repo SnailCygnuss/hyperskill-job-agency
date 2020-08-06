@@ -1,0 +1,10 @@
+{% extends "hyperjob/main.html" %}
+{% block title %} {{ block.super }} Vacancies {% endblock %}
+{% block heading %} List of Vacancies {% endblock %}
+{% block content %}
+    {% for vac in vacancy %}
+    <div>
+        {{ vac.author }}: {{ vac.description }}
+    </div>
+    {% endfor %}
+{% endblock %}

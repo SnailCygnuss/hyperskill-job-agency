@@ -1,0 +1,12 @@
+{% extends "hyperjob/main.html" %}
+{% block title %} {{ block.super }} Create Resume {% endblock %}
+{% block heading %} List of Resumes {% endblock %}
+{% block content %}
+    <div>
+        <form action="/resume/new" method="post">
+            {% csrf_token %}
+            <input name="description">
+            <button type="submit">Add resume</button>
+        </form>
+    </div>
+{% endblock %}

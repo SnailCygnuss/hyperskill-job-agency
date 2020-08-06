@@ -1,0 +1,27 @@
+{% extends "hyperjob/main.html" %}
+{% block title %}{{ block.super }} Profile Page {% endblock %}
+{% block heading %} Welcome {{ username }} {% endblock %}
+{% block content %}
+Your last login was on {{ last_login }}
+{% if is_staff == True %}
+<div>
+    <a class="btn btn-primary" href="/vacancy/new" role="button">Create Vacancy</a>
+</div>
+{% else %}
+<div>
+    <a class="btn btn-primary" href="/resume/new" role="button">Create Resume</a>
+</div>
+{% endif %}
+
+<div>
+    <form action="{% if is_staff %} /vacancy/new {% else %} /resume/new {% endif %}" method="post">
+        {% csrf_token %}
+        <label for="description">
+            Enter description of {% if is_staff %} vacancy {% else %} resume {% endif %}
+        </label>
+        <textarea name="description" id="description" row="50" cols="50" maxlength="1024"></textarea>
+        <button type="submit">Add {% if is_staff %} vacancy {% else %} resume {% endif %}</button>
+    </form>
+</div>
+
+{% endblock %}
