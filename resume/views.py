@@ -24,3 +24,14 @@ class CreateResumePage(View):
             return redirect('/home')
         else:
             return HttpResponseForbidden()
+
+
+class DeleteResumeItem(View):
+    def post(self, requests):
+        if requests.user.is_authenticated:
+            try:
+                delete_item = Resume.objects.get(description=requests.POST.get('del_desc'))
+                delete_item.delete()
+            except Resume.DoesNotExist:
+                pass
+            return redirect('/home')

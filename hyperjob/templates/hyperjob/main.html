@@ -9,18 +9,26 @@
 <body>
     <div class="container">
      <div class="row justify-content-center">
-        <h2>Welcome to HyperJob!</h2>
+         <h2><a href="/">HyperJob!</a></h2>
      </div>
     </div>
     <div class="container">
+        <div class="row">
+        <div class="col">
         {% include "hyperjob/topnav.html" %}
+        </div>
+        </div>
     </div>
+    <div class="mt-2 col-md-12"></div>
     <div class="container">
-        <h2>{% block heading %} Start Page {% endblock %}</h2>
+        <div class="row justify-content-center">
+            <h2>{% block heading %} {% endblock %}</h2>
+        </div>
     </div>
-    <div class="container">
+    <div class="container" style="min-height: 500px;">
         {% block content %} {% endblock %}
     </div>
+    <div class="mt-2 col-md-12"></div>
     <div class="container">
         <!-- Footer -->
         {% include "hyperjob/contact.html" %}

@@ -1,26 +1,73 @@
 {% extends "hyperjob/main.html" %}
-{% block title %}{{ block.super }} Profile Page {% endblock %}
-{% block heading %} Welcome {{ username }} {% endblock %}
+{% block title %}{{ block.super }} || Profile Page {% endblock %}
+{% block heading %} Welcome to your profile {% endblock %}
+
 {% block content %}
-Your last login was on {{ last_login }}
-{% if is_staff == True %}
-<div>
-    <a class="btn btn-primary" href="/vacancy/new" role="button">Create Vacancy</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if username != None %}
+            <div class="alert alert-success">
+                Welcome back <strong>{{ username }}</strong><br>
+                Your last login was on {{ last_login }}
+            </div>
+            {% else %}
+            <div class="alert alert-warning">
+                You are not logged in. Please log in to see your resume or add a resume
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
-{% else %}
-<div>
-    <a class="btn btn-primary" href="/resume/new" role="button">Create Resume</a>
+
+{% if username != None %}
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h3>List of {% if is_staff %} Vacancies {% else %} Resumes {% endif %} Created</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for desc in tab_data %}
+                <tr>
+                    <th scope="row" class="align-middle">{{ forloop.counter }}</th>
+                    <td class="align-middle">{{ desc.description }}</td>
+                    <td class="text-right">
+                        <form action="resume/delete" method="post">{% csrf_token %}
+                            <input name="del_desc" id="del_desc" type="hidden" value="{{ desc.description}}">
+                            <button type="submit" class="btn btn-danger text-justify-right">Delete</button>
+                        </form></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endif %}
 
-<div>
+<div class="container">
     <form action="{% if is_staff %} /vacancy/new {% else %} /resume/new {% endif %}" method="post">
         {% csrf_token %}
-        <label for="description">
-            Enter description of {% if is_staff %} vacancy {% else %} resume {% endif %}
-        </label>
-        <textarea name="description" id="description" row="50" cols="50" maxlength="1024"></textarea>
-        <button type="submit">Add {% if is_staff %} vacancy {% else %} resume {% endif %}</button>
+        <div class="form-group">
+            <label for="description">
+                Enter description of {% if is_staff %} vacancy {% else %} resume {% endif %}
+            </label>
+            <textarea class="form-control" name="description" id="description" rows="10" maxlength="1024" placeholder="Description of {% if is_staff %} vacancy {% else %} resume {% endif %}"></textarea>
+            <small id="description_help" class="form-text text-muted">Maximum 1024 characters</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Add {% if is_staff %} vacancy {% else %} resume {% endif %}</button>
     </form>
 </div>
 

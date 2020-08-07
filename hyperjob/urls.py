@@ -18,7 +18,7 @@ from django.urls import path
 from django.views.generic import RedirectView
 from .views import MainPage, MyLoginView, MySignupView, HomePageView
 from vacancy.views import VacancyPage, CreateVacancyPage
-from resume.views import ResumePage, CreateResumePage
+from resume.views import ResumePage, CreateResumePage, DeleteResumeItem
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -31,5 +31,6 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
     path('signup', MySignupView.as_view()),
     path('resume/new', CreateResumePage.as_view()),
-    path('vacancy/new', CreateVacancyPage.as_view())
+    path('vacancy/new', CreateVacancyPage.as_view()),
+    path('resume/delete', DeleteResumeItem.as_view())
 ]
